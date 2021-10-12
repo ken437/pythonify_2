@@ -15,4 +15,11 @@
         <listener class="com.github.ken437.pythonify2.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <actions>
+        <action id="Example" class="Example" text="Example"/>
+        <action id="Example1" class="Example1" text="Example1"
+                description="Demo action that should take the person to Google">
+            <add-to-group group-id="ViewMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>
