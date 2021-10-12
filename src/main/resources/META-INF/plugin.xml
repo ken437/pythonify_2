@@ -5,10 +5,12 @@
     <vendor>ken437</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.ken437.pythonify2.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.ken437.pythonify2.services.MyProjectService"/>
+        <annotator language="JAVA" implementationClass="ExampleAnnotation"/>
     </extensions>
 
     <applicationListeners>
