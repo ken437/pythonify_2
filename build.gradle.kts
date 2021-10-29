@@ -14,6 +14,7 @@ plugins {
     id("org.jetbrains.changelog") version "1.3.0"
     // Gradle Qodana Plugin
     id("org.jetbrains.qodana") version "0.1.12"
+    // id("Python") version "203.8084.24"
 }
 
 group = properties("pluginGroup")
@@ -34,7 +35,7 @@ intellij {
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
-    plugins.set(listOf("com.intellij.java"))
+    plugins.set(listOf("com.intellij.java", "PythonCore:203.8084.24"))
 }
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
