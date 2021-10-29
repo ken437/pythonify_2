@@ -1,5 +1,8 @@
 # pythonify_2
 
+This repository is an IntelliJ IDEA plugin that can detect antipatterns in Python code and offers quick fixes for many of them.
+
+<!--
 ![Build](https://github.com/ken437/pythonify_2/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
@@ -13,15 +16,28 @@
 - [ ] Set the Plugin ID in the above README badges.
 - [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html).
 - [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
-
+-->
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
-
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
-
-To keep everything working, do not remove `<!-- ... -->` sections. 
+## Antipatterns
+### E1: Access from end of array without negative index
+Antipattern example:
+```
+a = [1, 2, 3]
+b = a[len(a) - 1]
+```
+Fix:
+```
+a = [1, 2, 3]
+b = a[-1]
+```
+### E2: Star import
+Antipattern example:
+```
+from math import *
+```
 <!-- Plugin description end -->
 
+<!--
 ## Installation
 
 - Using IDE built-in plugin system:
@@ -34,7 +50,7 @@ To keep everything working, do not remove `<!-- ... -->` sections.
   Download the [latest release](https://github.com/ken437/pythonify_2/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
-
+-->
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
 
