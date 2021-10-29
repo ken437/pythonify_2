@@ -11,12 +11,12 @@ public class ExampleAnnotation implements Annotator {
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
 
-        if (!(element instanceof PyStringLiteralExpression))
-        {
+        if (!(element instanceof PyStringLiteralExpression)) {
             return;
         }
 
         holder.newAnnotation(HighlightSeverity.WARNING, "Annotation message!")
+                .withFix(new ExampleContextAction(element))
                 .create();
     }
 }
