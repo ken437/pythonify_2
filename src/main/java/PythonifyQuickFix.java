@@ -6,8 +6,11 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
+import com.jetbrains.python.psi.PyElementGenerator;
+import com.jetbrains.python.psi.PyPsiFacade;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,17 +40,24 @@ public abstract class PythonifyQuickFix extends BaseIntentionAction {
         int start = range.getStartOffset();
         int end = range.getEndOffset();
 
-        Document document = editor.getDocument();
-        WriteCommandAction.runWriteCommandAction(project,
-                () -> document.replaceString(start, end, this.getReplacement(this.element)));
+        Runnable tryReplace =  () -> {
+            try {
+                this.replace(this.element, new CodeBuilder(project));
+            } catch (NoAntipatternException e) {
+                throw new IncorrectOperationException(
+                        "Expected antipattern of type " + e.getAntipatternType() +
+                                " when replacing code but it wasn't present");
+            }
+        };
+        WriteCommandAction.runWriteCommandAction(project, tryReplace);
     }
 
     /**
-     * Gets a textual replacement for the original PSI element in
-     * the quick fix. Remember to escape double quotes.
+     * Gets a PSI replacement for the original PSI element in
+     * the quick fix.
      *
      * @param element the PSI element to replace
-     * @return the text to replace the PSI element as a string
+     * @param codeBuilder an object making it easier to generate PSI elements from text
      */
-    public abstract @NotNull String getReplacement(PsiElement element);
+    public abstract void replace(PsiElement element, CodeBuilder codeBuilder) throws NotE1Exception;
 }

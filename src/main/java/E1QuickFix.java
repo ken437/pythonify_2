@@ -1,5 +1,10 @@
+import com.google.rpc.Code;
 import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.psi.PsiElement;
+import com.jetbrains.python.psi.LanguageLevel;
+import com.jetbrains.python.psi.PyElementGenerator;
+import com.jetbrains.python.psi.PyExpression;
+import com.jetbrains.python.psi.PyReferenceExpression;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -11,8 +16,17 @@ public class E1QuickFix extends PythonifyQuickFix {
     }
 
     @Override
-    public @NotNull String getReplacement(PsiElement element) {
-        return "\"Hello, my name is Bob\"";
+    public void replace(PsiElement element, CodeBuilder codeBuilder) throws NotE1Exception {
+        E1Parser parser = new E1Parser(element);
+        assert parser.isE1();
+        PyExpression replacement = codeBuilder.buildExpression("a[n]");
+        PyReferenceExpression nameBeforeSub =
+                (PyReferenceExpression) codeBuilder.buildExpression(parser.getNameBeforeSub());
+        PyExpression subscriptContents =
+                codeBuilder.buildExpression("-" + parser.getNumAfterMinus());
+        replacement.getChildren()[0].replace(nameBeforeSub);
+        replacement.getChildren()[1].replace(subscriptContents);
+        element.replace(replacement);
     }
 
     @Override

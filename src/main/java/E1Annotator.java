@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Queue;
 
 /**
  * Annotates the E1 issue with a warning highlight and descriptive message
@@ -12,7 +13,7 @@ import java.util.Objects;
 public class E1Annotator extends PythonifyAnnotator {
     @Override
     public PythonifyQuickFix getQuickFix(PsiElement element) {
-        return null;
+        return new E1QuickFix(element);
     }
 
     @Override
