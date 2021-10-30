@@ -1,3 +1,5 @@
+package examples;
+
 import com.intellij.codeInsight.intention.impl.BaseIntentionAction;
 import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -12,7 +14,7 @@ import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 
 public class ExampleContextAction extends BaseIntentionAction {
-    private PsiElement element;
+    private final PsiElement element;
 
     public ExampleContextAction(PsiElement element) {
         this.element = element;

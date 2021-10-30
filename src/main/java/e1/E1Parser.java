@@ -1,3 +1,5 @@
+package e1;
+
 import com.intellij.psi.PsiElement;
 import com.jetbrains.python.psi.*;
 

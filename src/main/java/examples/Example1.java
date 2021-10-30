@@ -1,3 +1,5 @@
+package examples;
+
 import com.intellij.ide.BrowserUtil;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;

@@ -1,16 +1,16 @@
+package general;
+
 import com.intellij.codeInsight.intention.impl.BaseIntentionAction;
-import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import com.jetbrains.python.psi.PyElementGenerator;
-import com.jetbrains.python.psi.PyPsiFacade;
+import e1.NotE1Exception;
+import general.CodeBuilder;
+import general.NoAntipatternException;
 import org.jetbrains.annotations.NotNull;
 
 /**

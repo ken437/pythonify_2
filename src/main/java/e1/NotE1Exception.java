@@ -1,3 +1,6 @@
+package e1;
+
+import general.NoAntipatternException;
 import org.jetbrains.annotations.NotNull;
 
 public class NotE1Exception extends NoAntipatternException {

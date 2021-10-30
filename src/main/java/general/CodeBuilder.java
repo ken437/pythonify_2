@@ -1,3 +1,5 @@
+package general;
+
 import com.intellij.openapi.project.Project;
 import com.jetbrains.python.psi.LanguageLevel;
 import com.jetbrains.python.psi.PyElementGenerator;

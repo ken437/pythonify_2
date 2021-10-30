@@ -1,3 +1,5 @@
+package general;
+
 import org.jetbrains.annotations.NotNull;
 
 public abstract class NoAntipatternException extends Exception {

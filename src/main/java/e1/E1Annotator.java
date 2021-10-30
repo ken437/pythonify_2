@@ -1,6 +1,10 @@
+package e1;
+
 import com.intellij.psi.PsiElement;
 import com.jetbrains.python.psi.*;
 import com.jetbrains.python.psi.impl.references.PyOperatorReference;
+import general.PythonifyAnnotator;
+import general.PythonifyQuickFix;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

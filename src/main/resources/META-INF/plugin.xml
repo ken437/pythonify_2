@@ -11,8 +11,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.ken437.pythonify2.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.ken437.pythonify2.services.MyProjectService"/>
-        <annotator language="Python" implementationClass="E1Annotator"/>
-        <annotator language="Python" implementationClass="E2Annotator"/>
+        <annotator language="Python" implementationClass="e1.E1Annotator"/>
+        <annotator language="Python" implementationClass="e2.E2Annotator"/>
     </extensions>
 
     <applicationListeners>
@@ -20,8 +20,8 @@
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
     <actions>
-        <action id="Example" class="Example" text="Example"/>
-        <action id="Example1" class="Example1" text="Example1"
+        <action id="Example" class="examples.Example" text="Example"/>
+        <action id="Example1" class="examples.Example1" text="Example1"
                 description="Demo action that should take the person to Google">
             <add-to-group group-id="ViewMenu" anchor="last"/>
         </action>
