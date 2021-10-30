@@ -9,8 +9,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
 import e1.NotE1Exception;
-import general.CodeBuilder;
-import general.NoAntipatternException;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -59,5 +57,5 @@ public abstract class PythonifyQuickFix extends BaseIntentionAction {
      * @param element the PSI element to replace
      * @param codeBuilder an object making it easier to generate PSI elements from text
      */
-    public abstract void replace(PsiElement element, CodeBuilder codeBuilder) throws NotE1Exception;
+    public abstract void replace(PsiElement element, CodeBuilder codeBuilder) throws NoAntipatternException;
 }

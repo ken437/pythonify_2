@@ -1,7 +1,5 @@
 package e2;
 
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
 import com.intellij.psi.PsiElement;
 import com.jetbrains.python.psi.PyFromImportStatement;
 import general.PythonifyAnnotator;
