@@ -10,6 +10,10 @@ import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Represents a quick fix that the Pythonify tool can perform when it encounters
+ * an antipattern
+ */
 public abstract class PythonifyQuickFix extends BaseIntentionAction {
     private final PsiElement element;
 

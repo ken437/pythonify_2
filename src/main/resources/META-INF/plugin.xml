@@ -11,8 +11,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.ken437.pythonify2.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.ken437.pythonify2.services.MyProjectService"/>
-        <!-- <annotator language="Python" implementationClass="ExampleAnnotation"/> -->
         <annotator language="Python" implementationClass="E1Annotator"/>
+        <annotator language="Python" implementationClass="E2Annotator"/>
     </extensions>
 
     <applicationListeners>
