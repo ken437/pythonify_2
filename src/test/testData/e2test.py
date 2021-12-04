@@ -1,1 +1,0 @@
-<warning>from math import *</warning>
