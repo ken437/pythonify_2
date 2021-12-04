@@ -121,4 +121,8 @@ tasks {
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
     }
+
+    // test {
+    //     systemProperty("idea.home.path", "/path/to/intellij-community/")
+    // }
 }

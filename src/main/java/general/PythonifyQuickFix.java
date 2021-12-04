@@ -35,8 +35,6 @@ public abstract class PythonifyQuickFix extends BaseIntentionAction {
     @Override
     public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         TextRange range = this.element.getTextRange();
-        int start = range.getStartOffset();
-        int end = range.getEndOffset();
 
         Runnable tryReplace =  () -> {
             try {

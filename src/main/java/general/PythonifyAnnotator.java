@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
  * level, a message, and possibly a quick fix.
  */
 public abstract class PythonifyAnnotator implements Annotator {
+
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
         if (this.shouldAnnotate(element)) {
