@@ -35,6 +35,35 @@ Antipattern example:
 ```
 from math import *
 ```
+### E3: Use of mutable global variable
+Antipattern example:
+```
+the_glob = 1
+
+def func1():
+    global the_glob
+    the_glob = 2
+```
+
+### E4: Creating empty list using constructor rather than literal
+Antipattern example:
+```
+a = list()
+```
+Fix:
+```
+a = []
+```
+
+### E5: Creating empty dict using constructor rather than literal
+Antipattern example:
+```
+a = dict()
+```
+Fix:
+```
+a = {}
+```
 <!-- Plugin description end -->
 
 <!--
