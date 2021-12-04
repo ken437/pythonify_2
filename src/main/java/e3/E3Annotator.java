@@ -1,7 +1,6 @@
 package e3;
 
 import com.intellij.psi.PsiElement;
-import com.jetbrains.python.psi.PyFromImportStatement;
 import com.jetbrains.python.psi.PyGlobalStatement;
 import general.PythonifyAnnotator;
 import general.PythonifyQuickFix;
