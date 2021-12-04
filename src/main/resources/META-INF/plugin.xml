@@ -13,6 +13,7 @@
         <projectService serviceImplementation="com.github.ken437.pythonify2.services.MyProjectService"/>
         <annotator language="Python" implementationClass="e1.E1Annotator"/>
         <annotator language="Python" implementationClass="e2.E2Annotator"/>
+        <annotator language="Python" implementationClass="e3.E3Annotator"/>
     </extensions>
 
     <applicationListeners>
