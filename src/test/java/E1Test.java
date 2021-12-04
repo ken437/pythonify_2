@@ -1,18 +1,18 @@
-import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
-import org.jetbrains.uast.values.UBooleanConstant;
-
-public class E1Test extends LightJavaCodeInsightFixtureTestCase {
-    @Override
-    protected String getTestDataPath() {
-        return "src/test/testData";
-    }
-
+/**
+ * Performs testing related to the E1 issue
+ */
+public class E1Test extends PythonifyTest {
     /**
      * Tests the highlighting of a file containing E1 issues
      */
-    public void testE1() {
-        myFixture.configureByFile("e1test.py");
-        myFixture.checkHighlighting(true, false, false, false);
+    public void testE1Highlight() {
+        this.checkHighlight(myFixture, "e1");
+    }
+
+    /**
+     * Tests the quick fixes in a file containing E2 issues
+     */
+    public void testE1QuickFix() {
+        this.checkQuickFix(myFixture, "e1");
     }
 }
