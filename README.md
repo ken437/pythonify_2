@@ -64,6 +64,19 @@ Fix:
 ```
 a = {}
 ```
+
+### E6: For loop can be collapsed into list comprehension
+Antipattern example:
+```
+x = []
+for i in range(10):
+    x.append(i)
+```
+Fix:
+```
+x = [i for i in range(10)]
+```
+
 <!-- Plugin description end -->
 
 <!--
