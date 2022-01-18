@@ -18,6 +18,7 @@ public class E6Annotator extends PythonifyAnnotator {
 
     @Override
     public boolean shouldAnnotate(PsiElement element) {
-        return false;
+        E6Parser parser = new E6Parser(element);
+        return parser.isE6();
     }
 }

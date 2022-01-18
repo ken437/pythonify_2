@@ -25,6 +25,7 @@ public class E1Parser {
         initFields(element);
     }
 
+    // Separate method from constructor to allow returns
     private void initFields(PsiElement element)
     {
         if (!(element instanceof PySubscriptionExpression))
