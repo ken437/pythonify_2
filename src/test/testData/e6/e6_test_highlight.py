@@ -30,6 +30,11 @@ class B(A):
             print(w)
             w.append(i)
 
+        w = [1, 2, 3]
+
+        for i in range(10):
+            w.append(i)
+
         for i in range(10):
             w.append(i)
             print(w)
