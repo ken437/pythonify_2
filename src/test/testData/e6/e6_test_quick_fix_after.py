@@ -1,7 +1,5 @@
-def fors(self):
-    x = []
-    for i in range(100):
-        x.append(i)
+def fors():
+    x = [i for i in range(100)]
 
     for i in range(100):
         x.append(i)
@@ -14,10 +12,6 @@ def fors(self):
     for i in range(100):
         pass
 
-    x = []
-
-    for i in range(100):
-
-        x.append(i)
+    x = [i for i in range(100)]
 
     print(x)

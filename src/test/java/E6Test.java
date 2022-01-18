@@ -1,9 +1,9 @@
-public class E5Test extends PythonifyTest {
-    public void testE5Highlight() {
-        this.checkHighlight(myFixture, "e5");
+public class E6Test extends PythonifyTest {
+    public void testE6Highlight() {
+        this.checkHighlight(myFixture, "e6");
     }
 
-    public void testE5QuickFix() {
-        this.checkQuickFix(myFixture, "e5");
+    public void testE6QuickFix() {
+        this.checkQuickFix(myFixture, "e6");
     }
 }
