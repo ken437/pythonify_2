@@ -21,10 +21,8 @@ class B(A):
         z = [i for i in y]
         print(z, y)
         x = []
-        <warning>
-        for i in range(10):
-            x.append(i)
-        </warning>
+        <warning>for i in range(10):
+            x.append(i)</warning>
 
         w = []
         for i in range(10):
@@ -47,37 +45,36 @@ class B(A):
         for i in range(10):
             pass
 
-        self.field = []
-        <warning>
         for i in range(10):
-            self.field.append(i * i)
-        </warning>
+            w.append(i)
+
+        self.field = []
+        <warning>for i in range(10):
+            self.field.append(i * i)</warning>
 
         doubles = [(1, 2), (3, 4), (5, 6)]
         m = []
-        <warning>
-        for first, second in doubles:
-            m.append("hi")
-        </warning>
+        <warning>for first, second in doubles:
+            m.append("hi")</warning>
 
         m = []
-        for i in range(2, 10):
-            # This comment should stop the highlighting
+        <warning>for i in range(2, 10):
+            # This comment shouldn't stop the highlighting
+            m.append(i)</warning>
+
+        m = []
+        <warning>for i in range(2, 10):
             m.append(i)
+            # This comment shouldn't, either</warning>
 
         m = []
-        for i in range(2, 10):
-            m.append(i)
-            # This comment should, too
-
-        m = []
-        for i in range(2, 10):
+        <warning>for i in range(2, 10):
             # And this
 
-            m.append(i)
+            m.append(i)</warning>
 
         m = []
-        for i in range(2, 10):
+        <warning>for i in range(2, 10):
             m.append(i)
 
-            # And this
+            # And this</warning>

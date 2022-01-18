@@ -51,10 +51,6 @@ public class E6Parser {
             return;
         }
         this.isE6 = true;
-        System.out.println(this.assignTarget);
-        System.out.println(this.forSource);
-        System.out.println(this.forTarget);
-        System.out.println(this.appendArgs);
     }
 
     /**
@@ -110,13 +106,11 @@ public class E6Parser {
         this.forSource = forPart.getSource();
 
         PyStatement[] statements = forPart.getStatementList().getStatements();
-        System.out.println(statements);
         if (statements == null || statements.length != 1)
         {
             return false;
         }
         PyStatement firstStatement = statements[0];
-        System.out.println(firstStatement.getText());
         if (!(firstStatement instanceof PyExpressionStatement))
         {
             return false;
@@ -134,7 +128,7 @@ public class E6Parser {
         }
         PsiElement firstChild = firstCallee.getFirstChild();
         // NOTE: assumes assign statement is parsed before the for loop
-        if (firstChild == null || !(firstChild.equals(this.assignTarget)))
+        if (firstChild == null || !(firstChild.getText().equals(this.assignTarget.getText())))
         {
             return false;
         }
