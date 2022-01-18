@@ -5,6 +5,7 @@ from secrets import compare_digest
 def aFunc():
     return 10
 
+
 if __name__ == "__main__":
     cursor = sqlite3.connect("example.db").cursor()
     user_data = sys.argv[1]
