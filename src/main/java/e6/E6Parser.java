@@ -8,7 +8,10 @@ import java.util.Arrays;
 
 public class E6Parser {
     private boolean isE6;
-    private String assignTarget;  // variable name on the left side of the initial assignment
+    private PyExpression assignTarget;  // expression on the left side of the initial assignment
+    private PyExpression forTarget;  // expression between the "for" and "in" keywords
+    private PyExpression forSource;  // expression after the "in" keyword
+    private PyArgumentList appendArgs; // arguments to the append() call in the for loop body
 
     /**
      * Given a PsiElement, determine if it is an E6 and
@@ -42,11 +45,16 @@ public class E6Parser {
         PyAssignmentStatement prevAssign = (PyAssignmentStatement) prevElem;
         PyForStatement forElem = (PyForStatement) element;
 
-        if (!this.initFieldsFromAssign(prevAssign) || this.initFieldsFromLoop(forElem))
+        if (!(this.initFieldsFromAssign(prevAssign) && this.initFieldsFromLoop(forElem)))
         {
             this.isE6 = false;
             return;
         }
+        this.isE6 = true;
+        System.out.println(this.assignTarget);
+        System.out.println(this.forSource);
+        System.out.println(this.forTarget);
+        System.out.println(this.appendArgs);
     }
 
     /**
@@ -56,6 +64,8 @@ public class E6Parser {
      */
     private boolean initFieldsFromAssign(PyAssignmentStatement prevAssign) {
         PyExpression leftExpr = prevAssign.getLeftHandSideExpression();
+        this.assignTarget = leftExpr;
+        /*
         if (!(leftExpr instanceof PyTargetExpression)) {
             return false;
         }
@@ -65,6 +75,7 @@ public class E6Parser {
             return false;
         }
         this.assignTarget = leftName.getText();
+        */
 
         PyExpression valAssigned = prevAssign.getAssignedValue();
         if (!(valAssigned instanceof PyListLiteralExpression))
@@ -86,7 +97,59 @@ public class E6Parser {
      */
     private boolean initFieldsFromLoop(PyForStatement forElem)
     {
-        System.out.println(forElem.getForPart().getText());
+        PyForPart forPart = forElem.getForPart();
+        if (forPart.getTarget() == null)
+        {
+            return false;
+        }
+        this.forTarget = forPart.getTarget();
+        if (forPart.getSource() == null)
+        {
+            return false;
+        }
+        this.forSource = forPart.getSource();
+
+        PyStatement[] statements = forPart.getStatementList().getStatements();
+        System.out.println(statements);
+        if (statements == null || statements.length != 1)
+        {
+            return false;
+        }
+        PyStatement firstStatement = statements[0];
+        System.out.println(firstStatement.getText());
+        if (!(firstStatement instanceof PyExpressionStatement))
+        {
+            return false;
+        }
+        PyExpression firstExpr = ((PyExpressionStatement) firstStatement).getExpression();
+        if (!(firstExpr instanceof PyCallExpression))
+        {
+            return false;
+        }
+        PyCallExpression firstCall = (PyCallExpression) firstExpr;
+        PyExpression firstCallee = firstCall.getCallee();
+        if (firstCallee == null)
+        {
+            return false;
+        }
+        PsiElement firstChild = firstCallee.getFirstChild();
+        // NOTE: assumes assign statement is parsed before the for loop
+        if (firstChild == null || !(firstChild.equals(this.assignTarget)))
+        {
+            return false;
+        }
+        PsiElement lastChild = firstCallee.getLastChild();
+        if (!lastChild.getText().equals("append"))
+        {
+            return false;
+        }
+
+        PyArgumentList argList = firstCall.getArgumentList();
+        if (argList == null)
+        {
+            return false;
+        }
+        this.appendArgs = argList;
         return true;
     }
 
