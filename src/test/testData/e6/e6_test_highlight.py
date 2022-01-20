@@ -78,3 +78,11 @@ class B(A):
             m.append(i)
 
             # And this</warning>
+
+        superlonglistname = []
+        for k in [1, 2, 3]:
+            superlonglistname.append(k, 1)
+
+        m = []
+        <warning>for i in [1, 2, 3]:
+            m.append(i + 1)</warning>

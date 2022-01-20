@@ -31,4 +31,6 @@ def fors():
         for w in range(10):
             t.append(v + w)
 
+    t = [v - 1 for v in [1, 2, 5, 6]]
+
     print(x)
