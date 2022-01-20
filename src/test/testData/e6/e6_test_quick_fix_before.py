@@ -28,4 +28,17 @@ def fors():
 
         x.append(i)
 
+    t = []
+    for v, w in range(111):
+        t.append(v)
+
+    t = []
+    for v, w in range(111):
+        v.append(w)
+
+    t = []
+    for v in range(10):
+        for w in range(10):
+            t.append(v + w)
+
     print(x)
