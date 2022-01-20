@@ -2,6 +2,7 @@ import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.testFramework.PsiTestUtil;
 import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture;
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
 
@@ -28,6 +29,7 @@ public abstract class PythonifyTest extends LightJavaCodeInsightFixtureTestCase 
                     GlobalSearchScope.allScope(getProject()));
             assertEquals(1, files.length);
             fix.invoke(getProject(), getEditor(), files[0]);
+            PsiTestUtil.checkFileStructure(files[0]);  // ensure a consistent PSI structure was generated
         }
     }
 
