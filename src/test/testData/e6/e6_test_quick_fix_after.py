@@ -12,9 +12,7 @@ def fors():
     for i in range(100):
         x.append(i)
 
-    x = []
-    for i in range(100):
-        x.append(i * i + i / (i + 1))
+    x = [i * i + i / (i + 1) for i in range(100)]
 
     x = []
     for i in range(100):
