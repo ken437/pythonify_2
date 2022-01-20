@@ -11,7 +11,7 @@ public class E6Parser {
     private PyExpression assignTarget;  // expression on the left side of the initial assignment
     private PyExpression forTarget;  // expression between the "for" and "in" keywords
     private PyExpression forSource;  // expression after the "in" keyword
-    private PyArgumentList appendArgs; // arguments to the append() call in the for loop body
+    private PyExpression appendArg; // argument to the append() call in the for loop body
 
     /**
      * Given a PsiElement, determine if it is an E6 and
@@ -128,11 +128,11 @@ public class E6Parser {
         }
 
         PyArgumentList argList = firstCall.getArgumentList();
-        if (argList == null)
+        if (argList == null || argList.getArguments().length != 1)
         {
             return false;
         }
-        this.appendArgs = argList;
+        this.appendArg = argList.getArguments()[0];
         return true;
     }
 
@@ -148,8 +148,8 @@ public class E6Parser {
         return forSource;
     }
 
-    public PyArgumentList getAppendArgs() {
-        return appendArgs;
+    public PyExpression getAppendArg() {
+        return appendArg;
     }
 
     public PyExpression getAssignTarget() {

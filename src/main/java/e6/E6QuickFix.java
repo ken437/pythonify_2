@@ -2,9 +2,7 @@ package e6;
 
 import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.psi.PsiElement;
-import com.intellij.testFramework.PsiTestUtil;
 import com.jetbrains.python.psi.*;
-import com.jetbrains.python.psi.impl.PyAssignmentExpressionImpl;
 import general.CodeBuilder;
 import general.NoAntipatternException;
 import general.PythonifyQuickFix;
@@ -32,7 +30,7 @@ public class E6QuickFix extends PythonifyQuickFix {
         PsiElement replacementListCompElem = codeBuilder.buildExpression("[a for b in c]");
         assert replacementListCompElem instanceof PyListCompExpression;
         PyListCompExpression replacementListComp = (PyListCompExpression) replacementListCompElem;
-        this.replaceA(replacementListComp, parser.getAppendArgs());
+        this.replaceA(replacementListComp, parser.getAppendArg());
         this.replaceB(replacementListComp, parser.getForTarget());
         this.replaceC(replacementListComp, parser.getForSource());
 
@@ -43,9 +41,13 @@ public class E6QuickFix extends PythonifyQuickFix {
         element.delete();  // remove original for loop from the PSI tree
     }
 
-    private void replaceA(PyListCompExpression listComp, PyArgumentList newA)
+    private void replaceA(PyListCompExpression listComp, PyExpression newA)
     {
-        //
+        PsiElement[] children = listComp.getChildren();
+        int childIdxOfA = 0;
+        assert children.length >= childIdxOfA + 1;
+        PsiElement aElem = children[childIdxOfA];
+        aElem.replace(newA);
     }
 
     private void replaceB(PyListCompExpression listComp, PyExpression newB)
