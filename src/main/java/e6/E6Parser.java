@@ -61,17 +61,6 @@ public class E6Parser {
     private boolean initFieldsFromAssign(PyAssignmentStatement prevAssign) {
         PyExpression leftExpr = prevAssign.getLeftHandSideExpression();
         this.assignTarget = leftExpr;
-        /*
-        if (!(leftExpr instanceof PyTargetExpression)) {
-            return false;
-        }
-        PyTargetExpression leftTarget = (PyTargetExpression) leftExpr;
-        PsiElement leftName = leftTarget.getNameIdentifier();
-        if (leftName == null) {
-            return false;
-        }
-        this.assignTarget = leftName.getText();
-        */
 
         PyExpression valAssigned = prevAssign.getAssignedValue();
         if (!(valAssigned instanceof PyListLiteralExpression))
@@ -149,5 +138,21 @@ public class E6Parser {
 
     public boolean isE6() {
         return isE6;
+    }
+
+    public PyExpression getForTarget() {
+        return forTarget;
+    }
+
+    public PyExpression getForSource() {
+        return forSource;
+    }
+
+    public PyArgumentList getAppendArgs() {
+        return appendArgs;
+    }
+
+    public PyExpression getAssignTarget() {
+        return assignTarget;
     }
 }
