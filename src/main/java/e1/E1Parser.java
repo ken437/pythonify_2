@@ -1,6 +1,7 @@
 package e1;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
 import com.jetbrains.python.psi.*;
 
 import java.util.Objects;
@@ -56,6 +57,17 @@ public class E1Parser {
             return;
         }
         PyCallExpression leftCall = (PyCallExpression) leftPart;
+        PyExpression leftCallee = leftCall.getCallee();
+        if (leftCallee == null)
+        {
+            this.isE1 = false;
+            return;
+        }
+        if (leftCallee.getChildren().length != 0) // handles the self.len() case
+        {
+            this.isE1 = false;
+            return;
+        }
         PyNumericLiteralExpression litRight = (PyNumericLiteralExpression) rightPart;
         Long rightNum = litRight.getLongValue();
         if (opType == null || rightNum == null || rightNum <= 0)
