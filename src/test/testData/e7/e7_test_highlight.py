@@ -122,3 +122,19 @@ def func3():
     for i in range(100):
         if i % 3 == 0:
             list10.append(i)
+
+    list17 = []
+    for i in range(100):
+        if i % 3 == 0:
+            list17.append(i)
+        elif i % 2 == 0:
+            list17.append(2 * i)
+
+    list18 = []
+    for i in range(100):
+        if i % 3 == 0:
+            list18.append(i)
+        elif i % 2 == 0:
+            list18.append(2 * i)
+        else:
+            print("Neither")
