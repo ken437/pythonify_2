@@ -8,3 +8,12 @@ def func1():
     f = <warning>a[len(a) -10]</warning>
     # a[len(a) - 1]
     s = "a[len(a) - 1]"
+
+class LenDefiner:
+    def len(self):
+        print("I don't find the length of anything!")
+        return 1
+
+    def dont_highlight_here(self):
+        a = [1, 2, 3]
+        a = a[self.len(a) - 1]
