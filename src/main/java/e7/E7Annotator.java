@@ -1,8 +1,6 @@
 package e7;
 
 import com.intellij.psi.PsiElement;
-import e6.E6Parser;
-import e6.E6QuickFix;
 import general.PythonifyAnnotator;
 import general.PythonifyQuickFix;
 import org.jetbrains.annotations.NotNull;

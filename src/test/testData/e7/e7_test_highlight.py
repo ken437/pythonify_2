@@ -16,7 +16,7 @@ def func3():
     iterthrough = [1, 2, 3, 4]
 
     list1 = []
-    <warning>for i in iterthrough:
+    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
         if i % 2 == 0:
             list1.append(i)</warning>
 
@@ -32,39 +32,39 @@ def func3():
             print("Extra")
 
     list3 = []
-    <warning>for i in iterthrough:
+    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
         if i % 3 == 0:
             # Comment
             list3.append(i)</warning>
 
     list4 = []
-    <warning>for i in iterthrough:
+    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
         if i % 3 == 0:
-            list4.append(i)</warning>
-            # Comment
+            list4.append(i)
+            # Comment</warning>
 
     list5 = []
-    <warning>for i in iterthrough:
+    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
         # Comment
         if i % 3 == 0:
             list5.append(i)</warning>
 
     list6 = []
-    <warning>for i in iterthrough:
+    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
         if i % 3 == 0:
-            list6.append(i)</warning>
-        # Comment
+            list6.append(i)
+        # Comment</warning>
 
     list7 = []
     # Comment
-    <warning>for i in iterthrough:
+    for i in iterthrough:
         if i % 3 == 0:
-            list7.append(i)</warning>
+            list7.append(i)
 
     list8 = []
 
 
-    <warning>for i in iterthrough:
+    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
 
 
 
@@ -83,7 +83,7 @@ def func3():
             list9.append(i * 8)
 
     list10 = []
-    <warning>for i, k in [(1, 2), (3, 4), (5, 6)]:
+    <warning descr="For loop with if statement can be collapsed into list comprehension">for i, k in [(1, 2), (3, 4), (5, 6)]:
         if i % 3 == 0:
             list10.append(i * 8)</warning>
 

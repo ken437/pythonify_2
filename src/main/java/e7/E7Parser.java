@@ -9,12 +9,13 @@ public class E7Parser {
     private PyExpression assignTarget;  // expression on the left side of the initial assignment
     private PyExpression forTarget;  // expression between the "for" and "in" keywords
     private PyExpression forSource;  // expression after the "in" keyword
-    private PyExpression appendArg; // argument to the append() call in the for loop body
+    private PyExpression appendArg;  // argument to the append() call in the if statement body
+    private PyExpression ifCond;  // condition of the if statement within the for loop body
 
     /**
-     * Given a PsiElement, determine if it is an E6 and
+     * Given a PsiElement, determine if it is an E7 and
      * if so, extract fields from it.
-     * @param element the PsiElement to parse, looking for an E6 issue
+     * @param element the PsiElement to parse, looking for an E7 issue
      *                and copying necessary fields if it is there
      */
     public E7Parser(PsiElement element) {
@@ -53,7 +54,7 @@ public class E7Parser {
 
     /**
      * @param prevAssign Assignment statement before the for loop being examined
-     * @return false if something found that is inconsistent with an E6 issue
+     * @return false if something found that is inconsistent with an E7 issue
      *         being present; true otherwise
      */
     private boolean initFieldsFromAssign(PyAssignmentStatement prevAssign) {
@@ -75,7 +76,7 @@ public class E7Parser {
 
     /**
      * @param forElem For loop being examined
-     * @return false if something found that is inconsistent with an E6 issue
+     * @return false if something found that is inconsistent with an E7 issue
      *         being present; true otherwise
      */
     private boolean initFieldsFromLoop(PyForStatement forElem)
@@ -92,17 +93,37 @@ public class E7Parser {
         }
         this.forSource = forPart.getSource();
 
-        PyStatement[] statements = forPart.getStatementList().getStatements();
-        if (statements == null || statements.length != 1)
+        PyStatement[] loopBody = forPart.getStatementList().getStatements();
+        if (loopBody == null || loopBody.length != 1)
         {
             return false;
         }
-        PyStatement firstStatement = statements[0];
-        if (!(firstStatement instanceof PyExpressionStatement))
+        PyStatement firstStatement = loopBody[0];
+        if (!(firstStatement instanceof PyIfStatement))
         {
             return false;
         }
-        PyExpression firstExpr = ((PyExpressionStatement) firstStatement).getExpression();
+        PyIfStatement ifStatement = (PyIfStatement) firstStatement;
+        PyIfPart ifPart = ifStatement.getIfPart();
+        if (ifStatement.getElifParts().length != 0 || ifStatement.getElsePart() != null)
+        {
+            return false;
+        }
+        if (ifPart.getCondition() == null)
+        {
+            return false;
+        }
+        this.ifCond = ifPart.getCondition();
+        PyStatement[] ifBody =  ifPart.getStatementList().getStatements();
+        if (ifBody == null || ifBody.length != 1)
+        {
+            return false;
+        }
+        if (!(ifBody[0] instanceof PyExpressionStatement))
+        {
+            return false;
+        }
+        PyExpression firstExpr = ((PyExpressionStatement) ifBody[0]).getExpression();
         if (!(firstExpr instanceof PyCallExpression))
         {
             return false;
@@ -152,5 +173,9 @@ public class E7Parser {
 
     public PyExpression getAssignTarget() {
         return assignTarget;
+    }
+
+    public PyExpression getIfCond() {
+        return ifCond;
     }
 }

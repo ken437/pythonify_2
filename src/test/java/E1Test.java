@@ -10,7 +10,7 @@ public class E1Test extends PythonifyTest {
     }
 
     /**
-     * Tests the quick fixes in a file containing E2 issues
+     * Tests the quick fixes in a file containing E1 issues
      */
     public void testE1QuickFix() {
         this.checkQuickFix(myFixture, "e1");

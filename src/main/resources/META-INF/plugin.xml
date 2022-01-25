@@ -17,6 +17,7 @@
         <annotator language="Python" implementationClass="e4.E4Annotator"/>
         <annotator language="Python" implementationClass="e5.E5Annotator"/>
         <annotator language="Python" implementationClass="e6.E6Annotator"/>
+        <annotator language="Python" implementationClass="e7.E7Annotator"/>
     </extensions>
 
     <applicationListeners>
