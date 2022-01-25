@@ -1,9 +1,11 @@
 thelist = []
 
+
 def func1():
     for i in range(10):
         if i == 0:
             thelist.append(i)
+
 
 def func2():
 
@@ -11,6 +13,7 @@ def func2():
     for i in range(10):
         if i == 0:
             thelist.append(i)
+
 
 def func3():
     iterthrough = [1, 2, 3, 4]
@@ -63,13 +66,9 @@ def func3():
 
     list8 = []
 
-
     for i in iterthrough:
 
-
-
         if i % 3 == 0:
-
             list8.append(i)
 
     list9 = [1]
@@ -123,7 +122,7 @@ def func3():
         if i % 3 == 0:
             list10.append(i)
 
-    list17=[]
-    for  i in  range ( 10):
+    list17= []
+    for i in range ( 10):
         if True:
-            list11.append(i)
+            list17.append(i)

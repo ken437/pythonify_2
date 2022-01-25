@@ -22,8 +22,8 @@ public class E7QuickFix extends PythonifyQuickFix {
 
     @Override
     public void replace(PsiElement element, CodeBuilder codeBuilder) throws NoAntipatternException {
-        E6Parser parser = new E6Parser(element);
-        assert parser.isE6();
+        E7Parser parser = new E7Parser(element);
+        assert parser.isE7();
         TreeTraverseHelper traverseHelper = new TreeTraverseHelper();
 
         PsiElement previous = traverseHelper.getPreviousNWSibling(element);
@@ -31,12 +31,13 @@ public class E7QuickFix extends PythonifyQuickFix {
         assert previous instanceof PyAssignmentStatement;
         PyAssignmentStatement assignToModify = (PyAssignmentStatement) previous;
 
-        PsiElement replacementListCompElem = codeBuilder.buildExpression("[a for b in c]");
+        PsiElement replacementListCompElem = codeBuilder.buildExpression("[a for b in c if d]");
         assert replacementListCompElem instanceof PyListCompExpression;
         PyListCompExpression replacementListComp = (PyListCompExpression) replacementListCompElem;
         this.replaceA(replacementListComp, parser.getAppendArg());
         this.replaceB(replacementListComp, parser.getForTarget());
         this.replaceC(replacementListComp, parser.getForSource());
+        this.replaceD(replacementListComp, parser.getIfCond());
 
         PsiElement assignedValToModify = assignToModify.getAssignedValue();
         assert assignedValToModify != null;
@@ -68,6 +69,15 @@ public class E7QuickFix extends PythonifyQuickFix {
         PyExpression iterList = forComp.getIteratedList();
         assert iterList != null;
         iterList.replace(newC);
+    }
+
+    private void replaceD(PyListCompExpression listComp, PyExpression newD)
+    {
+        PsiElement[] children = listComp.getChildren();
+        int childIdxOfD = 3;
+        assert children.length >= childIdxOfD + 1;
+        PsiElement dElem = children[childIdxOfD];
+        dElem.replace(newD);
     }
 
     private PyComprehensionForComponent getForComp(PyListCompExpression listComp) {
