@@ -20,7 +20,7 @@ def notinputs():
     a = imput("I am not a prompt")
 
 class DefinesInput:
-    def input(self):
+    def input(self, fakeprompt):
         return 1
 
     def donthighlighthere(self):

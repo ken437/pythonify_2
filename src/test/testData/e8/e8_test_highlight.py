@@ -48,6 +48,10 @@ class NotFileUser:
         f = self.open("I'm not a file!", "I'm not a filemode!")
         print(f)
 
+def donthighlight():
+    nfs = NotFileUser()
+    print(nfs.open("I'm not a file!", "I'm not a filename!"))
+
 from PIL import Image
 def pillow():
     im = Image.open("Image file", "mode")

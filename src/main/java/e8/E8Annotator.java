@@ -7,6 +7,7 @@ import com.jetbrains.python.psi.PyFromImportStatement;
 import com.jetbrains.python.psi.PyWithItem;
 import general.PythonifyAnnotator;
 import general.PythonifyQuickFix;
+import general.TreeTraverseHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class E8Annotator extends PythonifyAnnotator {
@@ -22,25 +23,11 @@ public class E8Annotator extends PythonifyAnnotator {
 
     @Override
     public boolean shouldAnnotate(PsiElement element) {
-        if (!(element instanceof PyCallExpression))
+        TreeTraverseHelper helper = new TreeTraverseHelper();
+        if (!helper.isFuncWithName(element, "open"))
         {
             return false;
         }
-        PyCallExpression callExpr = (PyCallExpression) element;
-        PyExpression callee = callExpr.getCallee();
-        if (callee == null)
-        {
-            return false;
-        }
-        if (callee.getChildren().length != 0) // handles cases like self.open()
-        {
-            return false;
-        }
-        if (!(callExpr.isCalleeText("open")))
-        {
-            return false;
-        }
-
         PsiElement parent = element.getParent();
         return !(parent instanceof PyWithItem);
     }
