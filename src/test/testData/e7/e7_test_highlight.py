@@ -16,7 +16,7 @@ def func3():
     iterthrough = [1, 2, 3, 4]
 
     list1 = []
-    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
+    <warning>for i in iterthrough:
         if i % 2 == 0:
             list1.append(i)</warning>
 
@@ -32,25 +32,25 @@ def func3():
             print("Extra")
 
     list3 = []
-    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
+    <warning>for i in iterthrough:
         if i % 3 == 0:
             # Comment
             list3.append(i)</warning>
 
     list4 = []
-    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
+    <warning>for i in iterthrough:
         if i % 3 == 0:
             list4.append(i)
             # Comment</warning>
 
     list5 = []
-    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
+    <warning>for i in iterthrough:
         # Comment
         if i % 3 == 0:
             list5.append(i)</warning>
 
     list6 = []
-    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
+    <warning>for i in iterthrough:
         if i % 3 == 0:
             list6.append(i)
         # Comment</warning>
@@ -64,7 +64,7 @@ def func3():
     list8 = []
 
 
-    <warning descr="For loop with if statement can be collapsed into list comprehension">for i in iterthrough:
+    <warning>for i in iterthrough:
 
 
 
@@ -83,7 +83,7 @@ def func3():
             list9.append(i * 8)
 
     list10 = []
-    <warning descr="For loop with if statement can be collapsed into list comprehension">for i, k in [(1, 2), (3, 4), (5, 6)]:
+    <warning>for i, k in [(1, 2), (3, 4), (5, 6)]:
         if i % 3 == 0:
             list10.append(i * 8)</warning>
 
