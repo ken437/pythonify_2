@@ -5,6 +5,9 @@ import Crypto.Cipher
 from Crypto.Cipher import AES
 import hashlib
 import random
+from secrets import compare_digest
+from socket import socket
+
 
 def hi():
     a = "Hello, my name is Bob"
@@ -24,11 +27,42 @@ def hi():
     f3.close()
 
     password = "Hardcoded password"
+    pwd = "Hardcoded password"
+    passwd = "Hardcoded password"
+    pass_word = "Hardcoded password"
+    passWord = "Hardcoded password"
+    password1 = "Hardcoded password"
+    password2 = "Hardcoded password"
+    print(password, pwd, passwd, pass_word, passWord, password1, password2)
     key = "Hardcoded key"
     password1 = random.choice(["a", "b", "c"]) * 10  # random should not be used to generate a password
     print(password)
     print(password1)
     print(key)
+
+    if password == "Secret password":
+        print("Executing sensitive commands")
+    if "Secret password" == password:
+        print("Executing sensitive commands")
+    if compare_digest(password, "Secret password"):
+        print("Executing sensitive commands")
+    if compare_digest("Secret password", password):
+        print("Executing sensitive commands")
+
+    passvar = input("Please enter a sensitive password that everyone can see on the terminal: ")
+    passvar1 = input("Password: ")
+    print(passvar, passvar1)
+
+    ip_addr = "111.111.111.111"
+    ip = "111.111.111.111"
+    sock = socket.socket()
+    sock.bind(ip, 9090)
+    hostname = "Hardcoded!"
+    print(ip_addr, hostname)
+
+    user_name = "Username"
+    username = "Username"
+    print(user_name, username)
 
     con = sqlite3.connect("example.db")
     cur = con.cursor()
@@ -38,28 +72,26 @@ def hi():
     cur.execute("CREATE TABLE %s" % user_input)
     exec(user_input)
     exec("not malicious")
+    safe_var = "not malicious"
+    exec(safe_var)
+    exec("not" + "malicious")
 
     con.commit()
     con.close()
 
     key = b"Hello!"
     ciphers = []
-    ciphers += AES.new(key, AES.mode_ECB)
-    ciphers += AES.new(key, AES.mode_CBC, "\0")
-    ciphers += AES.new(key, AES.mode_CBC)
-    ciphers += AES.new(str(random.randint(1000)), AES.mode_CBC)
-    ciphers += AES.new(b"1000", AES.mode_CBC)
+    ciphers += AES.new(key, AES.MODE_ECB)
+    ciphers += AES.new(key, AES.MODE_CBC, "\0")
+    ciphers += AES.new(key, AES.MODE_CBC)
+    ciphers += AES.new(b"1000", AES.MODE_CBC)
     print(ciphers)
 
     hashlib.sha1()
-    hashlib.sha()
     hashlib.md5()
-    hashlib.md4()
 
-    Crypto.Cipher.SHA.new()
-    Crypto.Cipher.RC2.new()
+    Crypto.Cipher.ARC4.new()
     Crypto.Cipher.Blowfish.new()
-    Crypto.Cipher.RC4.new()
 
     rand = random.random()
     print(rand)
