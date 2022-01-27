@@ -18,7 +18,7 @@ public class E8Annotator extends PythonifyAnnotator {
 
     @Override
     public @NotNull String getMessage() {
-        return "E8: Use a with statement when opening a file using open()";
+        return "E8: Using open() to open a file without a with statement";
     }
 
     @Override
