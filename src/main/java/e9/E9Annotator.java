@@ -48,19 +48,10 @@ public class E9Annotator extends PythonifyAnnotator {
 
     private boolean isPasswordPrompt(String prompt)
     {
-        List<String> passwordPrompts = List.of(
-                "password",
-                "enter password here",
-                "enter password",
-                "enter the password",
-                "enter a password",
-                "please enter password here",
-                "please enter password",
-                "please enter the password",
-                "please enter a password"
-        );
+        // Matches strings that are very likely password prompts
+        String passwordPromptRegex = "^(?:please )?(?:enter )?(?:your )?(?:a )?(?:the )?[a-zA-Z]* ?password$";
         String cleanPrompt = this.cleanPrompt(prompt);
-        return passwordPrompts.contains(cleanPrompt);
+        return cleanPrompt.matches(passwordPromptRegex);
     }
 
     @Override

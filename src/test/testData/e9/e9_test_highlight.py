@@ -5,6 +5,12 @@ def badinputs():
     a = <warning>input("enter password")</warning>
     a = <warning>input("password")</warning>
     a = <warning>input("Enter password:")</warning>
+    a = <warning>input("Please enter your database password:  ")</warning>
+    a = <warning>input("Enter database password:")</warning>
+    a = <warning>input("MySQL password:")</warning>
+    a = <warning>input("Your MySQL password:")</warning>
+    a = <warning>input("Enter the database password")</warning>
+    a = <warning>input("root password:")</warning>
 
 def goodinputs():
     a = input("Username:")
