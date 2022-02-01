@@ -1,14 +1,12 @@
 package e11;
 
 import com.intellij.psi.PsiElement;
-import com.jetbrains.python.psi.PyCallExpression;
-import com.jetbrains.python.psi.PyExpression;
-import com.jetbrains.python.psi.PyReferenceExpression;
-import com.jetbrains.python.psi.PyStringLiteralExpression;
+import com.jetbrains.python.psi.*;
 import com.jetbrains.python.refactoring.PyBaseRefactoringAction;
 import general.HardcodeUtils;
 import general.PythonifyAnnotator;
 import general.PythonifyQuickFix;
+import general.TreeTraverseHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,6 +24,7 @@ public class E11Annotator extends PythonifyAnnotator {
 
     @Override
     public boolean shouldAnnotate(PsiElement element) {
+        TreeTraverseHelper helper = new TreeTraverseHelper();
         if (!(element instanceof PyCallExpression))
         {
             return false;
@@ -36,8 +35,16 @@ public class E11Annotator extends PythonifyAnnotator {
             PyExpression kwargVal = callExpr.getKeywordArgument(passwordKwarg);
             if (kwargVal instanceof PyReferenceExpression)
             {
-                System.out.println(kwargVal.getText());
-                return true;
+                PyReferenceExpression argElem = (PyReferenceExpression) kwargVal;
+                PyAssignmentStatement lastAssign = helper.findLastAssignToVar(argElem);
+                if (lastAssign == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return lastAssign.getAssignedValue() instanceof PyStringLiteralExpression;
+                }
             }
         }
         return false;

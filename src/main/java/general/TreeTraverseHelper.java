@@ -3,8 +3,7 @@ package general;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl;
-import com.jetbrains.python.psi.PyCallExpression;
-import com.jetbrains.python.psi.PyExpression;
+import com.jetbrains.python.psi.*;
 
 /**
  * Contains utility methods to help assist with traversing the PSI tree
@@ -64,5 +63,58 @@ public class TreeTraverseHelper {
             return false;
         }
         return callExpr.isCalleeText(name);
+    }
+
+    /**
+     * Given a variable in the program, attempt to locate an assignment to it on the same
+     * level as startHere in PSI elements previous to startHere
+     * @param varExpr the PSI element corresponding to the variable
+     * @param startHere the PSI element from which to start the search
+     * @return the PSI element corresponding to the last assignment to this variable,
+     * if this can be found. Otherwise, return null
+     */
+    private PyAssignmentStatement findSiblingAssign(PyReferenceExpression varExpr, PsiElement startHere)
+    {
+        PsiElement currElem = startHere;
+        while (currElem != null)
+        {
+            if (currElem instanceof PyAssignmentStatement)
+            {
+                PyAssignmentStatement currAssign = (PyAssignmentStatement) currElem;
+                PyExpression leftOfAssign = currAssign.getLeftHandSideExpression();
+                if (leftOfAssign != null && leftOfAssign.getName() != null &&
+                        leftOfAssign.getName().equals(varExpr.getName()))
+                {
+                    return currAssign;
+                }
+            }
+            currElem = currElem.getPrevSibling();
+        }
+        return null; // no assignment found on this level
+    }
+
+    /**
+     * Given a variable in the program, attempt to locate the last place where
+     * it was assigned to
+     * @param varExpr the PSI element corresponding to the variable
+     * @return the PSI element corresponding to the last assignment to this variable,
+     * if this can be found. Otherwise, return null
+     */
+    public PyAssignmentStatement findLastAssignToVar(PyReferenceExpression varExpr)
+    {
+        // start at the variable expression and continuously search while ascending the tree
+        PsiElement currElem = varExpr;
+        while (currElem != null && !(currElem instanceof PyFile))
+        {
+            PyAssignmentStatement assignOnThisLevel = this.findSiblingAssign(varExpr, currElem);
+            if (assignOnThisLevel == null) {
+                currElem = currElem.getParent(); // ascend a level because no assign found on this level
+            }
+            else
+            {
+                return assignOnThisLevel;
+            }
+        }
+        return null;
     }
 }
