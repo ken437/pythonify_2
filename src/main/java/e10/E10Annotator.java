@@ -9,7 +9,7 @@ import general.PythonifyQuickFix;
 import general.TreeTraverseHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
+import java.util.List;
 
 public class E10Annotator extends PythonifyAnnotator {
     @Override
@@ -22,9 +22,33 @@ public class E10Annotator extends PythonifyAnnotator {
         return "E10: password argument of a function passed a hardcoded string";
     }
 
+    /**
+     * List of all of the possible keyword arguments that are probably for passwords
+     * @return
+     */
+    private List<String> getPasswordKeywords() {
+        return List.of(
+                "password",
+                "passwd",
+                "pass_word"
+        );
+    }
+
     @Override
     public boolean shouldAnnotate(PsiElement element) {
-        TreeTraverseHelper helper = new TreeTraverseHelper();
+        if (!(element instanceof PyCallExpression))
+        {
+            return false;
+        }
+        PyCallExpression callExpr = (PyCallExpression) element;
+        for (String passwordKwarg: this.getPasswordKeywords())
+        {
+            PyExpression kwargVal = callExpr.getKeywordArgument(passwordKwarg);
+            if (kwargVal instanceof PyStringLiteralExpression)
+            {
+                return true;
+            }
+        }
         return false;
     }
 }
