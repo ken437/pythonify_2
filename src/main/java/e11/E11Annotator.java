@@ -1,18 +1,19 @@
-package e10;
+package e11;
 
 import com.intellij.psi.PsiElement;
 import com.jetbrains.python.psi.PyCallExpression;
 import com.jetbrains.python.psi.PyExpression;
+import com.jetbrains.python.psi.PyReferenceExpression;
 import com.jetbrains.python.psi.PyStringLiteralExpression;
+import com.jetbrains.python.refactoring.PyBaseRefactoringAction;
 import general.HardcodeUtils;
 import general.PythonifyAnnotator;
 import general.PythonifyQuickFix;
-import general.TreeTraverseHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class E10Annotator extends PythonifyAnnotator {
+public class E11Annotator extends PythonifyAnnotator {
     @Override
     public PythonifyQuickFix getQuickFix(PsiElement element) {
         return null;
@@ -20,7 +21,7 @@ public class E10Annotator extends PythonifyAnnotator {
 
     @Override
     public @NotNull String getMessage() {
-        return "E10: password argument of a function directly passed a hardcoded string";
+        return "E11: password argument of a function was previously assigned a hardcoded string";
     }
 
     @Override
@@ -33,8 +34,9 @@ public class E10Annotator extends PythonifyAnnotator {
         for (String passwordKwarg: HardcodeUtils.getPasswordKeywords())
         {
             PyExpression kwargVal = callExpr.getKeywordArgument(passwordKwarg);
-            if (kwargVal instanceof PyStringLiteralExpression)
+            if (kwargVal instanceof PyReferenceExpression)
             {
+                System.out.println(kwargVal.getText());
                 return true;
             }
         }
