@@ -77,6 +77,33 @@ Fix:
 x = [i for i in range(10)]
 ```
 
+### E7: For loop with if statement can be collapsed into list comprehension
+Antipattern example:
+```
+x = []
+for i in range(10):
+    if i % 2 == 0:
+        x.append(i)
+```
+Fix:
+```
+x = [i for i in range(10) if i % 2 == 0]
+```
+
+### E8: Using open() to open a file without a with statement
+Antipattern example:
+```
+f = open("file.txt", "r")
+print(f.read())
+f.close()
+```
+
+### E9: input() echoes the password to the terminal; use getpass() or a similar function instead
+Antipattern example:
+```
+user_input = input("Enter password: ")
+```
+
 <!-- Plugin description end -->
 
 <!--
